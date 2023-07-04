@@ -11,7 +11,8 @@
   (names bigstring_stubs md5_stubs array_stubs gc_stubs time_ns_stubs))
  (ocamlopt_flags :standard (:include ocamlopt-flags))
  (preprocess (pps ppx_jane ppx_optcomp)) (preprocessor_deps config.h)
- (js_of_ocaml (javascript_files strftime.js runtime.js)))
+ (js_of_ocaml (javascript_files strftime.js runtime.js)
+  (wasm_files runtime.wat)))
 
 (documentation)
 
