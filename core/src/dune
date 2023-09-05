@@ -7,8 +7,8 @@
   ppx_assert.runtime-lib ppx_hash.runtime-lib ppx_inline_test.runtime-lib
   sexplib splittable_random stdio time_now typerep univ_map validate
   variantslib)
- (c_flags :standard -D_LARGEFILE64_SOURCE)
- (c_names bigstring_stubs md5_stubs array_stubs gc_stubs time_ns_stubs)
+ (foreign_stubs (language c) (flags :standard -D_LARGEFILE64_SOURCE)
+  (names bigstring_stubs md5_stubs array_stubs gc_stubs time_ns_stubs))
  (ocamlopt_flags :standard (:include ocamlopt-flags))
  (preprocess (pps ppx_jane ppx_optcomp)) (preprocessor_deps config.h)
  (js_of_ocaml (javascript_files strftime.js runtime.js)))
