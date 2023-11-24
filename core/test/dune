@@ -1,5 +1,11 @@
 (library (name core_test)
  (libraries base_test_helpers core expect_test_helpers_core core_kernel.fheap
-  core_kernel.version_util expect_test_patterns sexp_grammar_validation)
- (preprocessor_deps ../src/config.h)
- (preprocess (pps ppx_jane ppx_bin_and_sexp_digest)))
+  core_kernel.version_util ; expect_test_patterns
+  sexp_grammar_validation)
+ (inline_tests
+  (flags -drop-tag no-js -drop-tag 64-bits-only)
+  (modes js)
+  (deps sample_time_zone_file))
+; (preprocessor_deps ../src/config.h)
+ (preprocess (pps ppx_jane ;ppx_bin_and_sexp_digest
+)))

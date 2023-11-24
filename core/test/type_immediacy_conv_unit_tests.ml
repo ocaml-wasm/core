@@ -373,6 +373,10 @@ let%test_module _ =
         (test_inconvertible_ints conv no_int_but_zero_converts)
         ~if_false_then_print_s:(lazy [%message "non-zero should not convert"]);
       [%expect {|
+        (* CR-someday require-failed: lib/core/core/test/type_immediacy_conv_unit_tests.ml:LINE:COL.
+           Do not 'X' this CR; instead make the required property true,
+           which will make the CR disappear.  For more information, see
+           [Expect_test_helpers_base.require]. *)
         "zero should convert" |}]
     ;;
 
@@ -444,6 +448,10 @@ let%test_module _ =
         (test_inconvertible_ints conv no_int_but_zero_converts)
         ~if_false_then_print_s:(lazy [%message "non-zero should not convert"]);
       [%expect {|
+        (* CR-someday require-failed: lib/core/core/test/type_immediacy_conv_unit_tests.ml:LINE:COL.
+           Do not 'X' this CR; instead make the required property true,
+           which will make the CR disappear.  For more information, see
+           [Expect_test_helpers_base.require]. *)
         "zero should convert" |}]
     ;;
 
