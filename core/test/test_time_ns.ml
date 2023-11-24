@@ -101,7 +101,7 @@ let%expect_test "Time_ns.Span.Stable.V1" =
     ((sexp   11.2754s)
      (bin_io "\252\128\143\017\160\002\000\000\000")
      (int63  11_275_440_000))
-    (* require-failed: lib/core/test/test_time_ns.ml:LINE:COL. *)
+    (* require-failed: lib/core/core/test/test_time_ns.ml:LINE:COL. *)
     ("sexp serialization failed to round-trip"
       (original       11.2754s)
       (sexp           11.2754s)
@@ -1230,53 +1230,53 @@ let%expect_test "time zone invalid offset parsing" =
      Ofday_helpers.ml) unless someone cares *)
   [%expect
     {|
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (lib/core/core/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012345-0:"
      ("Time.Ofday: invalid string"
       0:
       "expected colon or am/pm suffix with optional space after minutes"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (lib/core/core/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012345-00:"
      ("Time.Ofday: invalid string"
       00:
       "expected colon or am/pm suffix with optional space after minutes"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (lib/core/core/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012345-0:0"
      ("Time.Ofday: invalid string"
       0:0
       "expected colon or am/pm suffix with optional space after minutes"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (lib/core/core/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012345-00:0"
      ("Time.Ofday: invalid string"
       00:0
       "expected colon or am/pm suffix with optional space after minutes"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (lib/core/core/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012345-:"
      (Invalid_argument "index out of bounds"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (lib/core/core/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012345-:00"
      (Failure "Char.get_digit_exn ':': not a digit"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (lib/core/core/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012345-"
      (Invalid_argument "index out of bounds")) |}];
   test [%here] "2000-01-01 12:34:56.789012-25:00";
   test [%here] "2000-01-01 12:34:56.789012-25";
   [%expect
     {|
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (lib/core/core/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012-25:00"
      ("Time.Ofday: invalid string" 25:00 "hours out of bounds"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (lib/core/core/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012-25"
      ("Time.Ofday: invalid string" 25:00 "hours out of bounds")) |}];
   test [%here] "2000-01-01 12:34:56.789012--1:00";
   test [%here] "2000-01-01 12:34:56.789012--1";
   [%expect
     {|
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (lib/core/core/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012--1:00"
      (Failure "Char.get_digit_exn '-': not a digit"))
-    (time_ns.ml.To_and_of_string.Time_ns_of_string
+    (lib/core/core/src/time_ns.ml.To_and_of_string.Time_ns_of_string
      "2000-01-01 12:34:56.789012--1"
      (Invalid_argument "index out of bounds")) |}]
 ;;
@@ -1484,7 +1484,7 @@ let%expect_test "approximate conversions" =
   [%expect
     {|
     ("quickcheck: test failed" (input -225.617us))
-    (* require-failed: lib/core/test/test_time_ns.ml:LINE:COL. *)
+    (* require-failed: lib/core/core/test/test_time_ns.ml:LINE:COL. *)
     ("result can be imprecise"
       (span    -225.617us)
       (precise -225.617)
@@ -1494,7 +1494,7 @@ let%expect_test "approximate conversions" =
   [%expect
     {|
     ("quickcheck: test failed" (input -627d5h39m8.208643064s))
-    (* require-failed: lib/core/test/test_time_ns.ml:LINE:COL. *)
+    (* require-failed: lib/core/core/test/test_time_ns.ml:LINE:COL. *)
     ("result can be imprecise"
       (span    -627d5h39m8.208643064s)
       (precise -54193148208.643066)
@@ -1504,7 +1504,7 @@ let%expect_test "approximate conversions" =
   [%expect
     {|
     ("quickcheck: test failed" (input -15.508265059s))
-    (* require-failed: lib/core/test/test_time_ns.ml:LINE:COL. *)
+    (* require-failed: lib/core/core/test/test_time_ns.ml:LINE:COL. *)
     ("result can be imprecise"
       (span    -15.508265059s)
       (precise -15.508265059)
@@ -1514,7 +1514,7 @@ let%expect_test "approximate conversions" =
   [%expect
     {|
     ("quickcheck: test failed" (input 44.923us))
-    (* require-failed: lib/core/test/test_time_ns.ml:LINE:COL. *)
+    (* require-failed: lib/core/core/test/test_time_ns.ml:LINE:COL. *)
     ("result can be imprecise"
       (span    44.923us)
       (precise 7.4871666666666662E-07)
@@ -1524,7 +1524,7 @@ let%expect_test "approximate conversions" =
   [%expect
     {|
     ("quickcheck: test failed" (input 76.753us))
-    (* require-failed: lib/core/test/test_time_ns.ml:LINE:COL. *)
+    (* require-failed: lib/core/core/test/test_time_ns.ml:LINE:COL. *)
     ("result can be imprecise"
       (span    76.753us)
       (precise 2.1320277777777777E-08)
@@ -1534,7 +1534,7 @@ let%expect_test "approximate conversions" =
   [%expect
     {|
     ("quickcheck: test failed" (input -225.617us))
-    (* require-failed: lib/core/test/test_time_ns.ml:LINE:COL. *)
+    (* require-failed: lib/core/core/test/test_time_ns.ml:LINE:COL. *)
     ("result can be imprecise"
       (span    -225.617us)
       (precise -2.6113078703703705E-09)
