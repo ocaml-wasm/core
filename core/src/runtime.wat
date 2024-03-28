@@ -31,6 +31,51 @@
       (func $caml_string_of_jsstring (param (ref eq)) (result (ref eq))))
    (import "env" "caml_jsstring_of_string"
       (func $caml_jsstring_of_string (param (ref eq)) (result (ref eq))))
+   (import "env" "caml_md5_chan"
+      (func $caml_md5_chan (param (ref eq)) (param (ref eq)) (result (ref eq))))
+   (import "env" "caml_ml_open_descriptor_in"
+      (func $caml_ml_open_descriptor_in (param (ref eq)) (result (ref eq))))
+   (import "env" "ocaml_exception" (tag $ocaml_exception (param (ref eq))))
+   (import "env" "caml_create_bytes"
+      (func $caml_create_bytes (param (ref eq)) (result (ref eq))))
+   (import "env" "caml_blit_string"
+      (func $caml_blit_string
+         (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq))
+         (param (ref eq)) (result (ref eq))))
+   (import "env" "caml_md5_string"
+      (func $caml_md5_string
+         (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))))
+   (import "env" "caml_bigstring_blit_ba_to_bytes"
+      (func $bigstring_blit_bigstring_bytes_stub
+         (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq))
+         (param (ref eq)) (result (ref eq))))
+   (import "env" "caml_invalid_argument"
+      (func $caml_invalid_argument (param (ref eq))))
+   (import "env" "caml_ba_alloc"
+      (func $caml_ba_alloc
+         (param i32) (param i32) (param i32) (param (ref extern))
+         (param (ref $int_array))
+         (result (ref eq))))
+   (import "env" "caml_ba_get_kind"
+      (func $caml_ba_get_kind (param (ref eq)) (result i32)))
+   (import "env" "caml_ba_get_layout"
+      (func $caml_ba_get_layout (param (ref eq)) (result i32)))
+   (import "env" "caml_ba_create_buffer"
+      (func $caml_ba_create_buffer
+         (param i32) (param i32) (result (ref extern))))
+   (import "env" "caml_ba_get_data"
+      (func $caml_ba_get_data (param (ref eq)) (result (ref extern))))
+   (import "env" "caml_ba_set_data"
+      (func $caml_ba_set_data (param (ref eq)) (param (ref extern))))
+   (import "env" "caml_ba_get_dim"
+      (func $caml_ba_get_dim (param (ref eq)) (result (ref $int_array))))
+   (import "env" "caml_ba_sub"
+       (func $caml_ba_sub
+          (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))))
+   (import "env" "caml_ba_blit"
+       (func $caml_ba_blit (param (ref eq)) (param (ref eq)) (result (ref eq))))
+   (import "env" "caml_ba_dim_1"
+       (func $caml_ba_dim_1 (param (ref eq)) (result (ref eq))))
 
    (type $block (array (mut (ref eq))))
    (type $string (array (mut i8)))
@@ -99,12 +144,6 @@
       (param (ref eq)) (result (ref eq))
       (ref.i31 (i32.const 0)))
 
-   (import "env" "caml_md5_chan"
-      (func $caml_md5_chan (param (ref eq)) (param (ref eq)) (result (ref eq))))
-   (import "env" "caml_ml_open_descriptor_in"
-      (func $caml_ml_open_descriptor_in (param (ref eq)) (result (ref eq))))
-   (import "env" "ocaml_exception" (tag $ocaml_exception (param (ref eq))))
-
    (func (export "core_md5_fd") (param $fd (ref eq)) (result (ref eq))
       (local $ic (ref eq))
       (local $s (ref eq))
@@ -112,20 +151,6 @@
       (local.set $s
          (call $caml_md5_chan (local.get $ic) (ref.i31 (i32.const -1))))
       (return (local.get $s)))
-
-   (import "env" "caml_create_bytes"
-      (func $caml_create_bytes (param (ref eq)) (result (ref eq))))
-   (import "env" "caml_blit_string"
-      (func $caml_blit_string
-         (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq))
-         (param (ref eq)) (result (ref eq))))
-   (import "env" "caml_md5_string"
-      (func $caml_md5_string
-         (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))))
-   (import "env" "caml_bigstring_blit_ba_to_bytes"
-      (func $bigstring_blit_bigstring_bytes_stub
-         (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq))
-         (param (ref eq)) (result (ref eq))))
 
    (func (export "core_md5_digest_subbigstring")
       (param $buf (ref eq)) (param $ofs (ref eq)) (param $len (ref eq))
@@ -148,34 +173,6 @@
      (ref.i31 (i32.const 0)))
 
    (type $int_array (array (mut i32)))
-
-   (import "env" "caml_invalid_argument"
-      (func $caml_invalid_argument (param (ref eq))))
-   (import "env" "caml_ba_alloc"
-      (func $caml_ba_alloc
-         (param i32) (param i32) (param i32) (param (ref extern))
-         (param (ref $int_array))
-         (result (ref eq))))
-   (import "env" "caml_ba_get_kind"
-      (func $caml_ba_get_kind (param (ref eq)) (result i32)))
-   (import "env" "caml_ba_get_layout"
-      (func $caml_ba_get_layout (param (ref eq)) (result i32)))
-   (import "env" "caml_ba_create_buffer"
-      (func $caml_ba_create_buffer
-         (param i32) (param i32) (result (ref extern))))
-   (import "env" "caml_ba_get_data"
-      (func $caml_ba_get_data (param (ref eq)) (result (ref extern))))
-   (import "env" "caml_ba_set_data"
-      (func $caml_ba_set_data (param (ref eq)) (param (ref extern))))
-   (import "env" "caml_ba_get_dim"
-      (func $caml_ba_get_dim (param (ref eq)) (result (ref $int_array))))
-   (import "env" "caml_ba_sub"
-       (func $caml_ba_sub
-          (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))))
-   (import "env" "caml_ba_blit"
-       (func $caml_ba_blit (param (ref eq)) (param (ref eq)) (result (ref eq))))
-   (import "env" "caml_ba_dim_1"
-       (func $caml_ba_dim_1 (param (ref eq)) (result (ref eq))))
 
    (data $bigstring_destroy_already_deallocated
       "bigstring_destroy: bigstring is already deallocated")

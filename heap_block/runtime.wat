@@ -4,7 +4,8 @@
 
    (type $block (array (mut (ref eq))))
 
-   (func "core_heap_block_is_heap_block" (param (ref eq)) (result (ref eq))
+   (func (export "core_heap_block_is_heap_block")
+      (param (ref eq)) (result (ref eq))
       (local $tag i32)
       (drop (block $not_block (result (ref eq))
          (local.set $tag
@@ -12,11 +13,13 @@
                (ref.cast (ref i31)
                (array.get $block
                   (br_on_cast_fail $not_block (ref eq) (ref $block)
-                     (local.get $0))
+                     (local.get 0))
                   (i32.const 0)))))
-         (ref.i31
-            (i32.eqz
-               (i32.or (i32.eq (local.get $tag) (global.get $lazy_tag))
-                       (i32.eq (local.get $tag) (global.get $forward_tag)))))))
+         (return
+            (ref.i31
+               (i32.eqz
+                  (i32.or
+                     (i32.eq (local.get $tag) (global.get $lazy_tag))
+                     (i32.eq (local.get $tag) (global.get $forward_tag))))))))
       (ref.i31 (i32.const 0)))
 )
