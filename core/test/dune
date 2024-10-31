@@ -4,7 +4,7 @@
   sexp_grammar_validation)
  (inline_tests
   (flags -drop-tag no-js -drop-tag 64-bits-only)
-  (modes js)
+  (modes js wasm)
   (deps sample_time_zone_file))
 ; (preprocessor_deps ../src/config.h)
  (preprocess (pps ppx_jane ;ppx_bin_and_sexp_digest
