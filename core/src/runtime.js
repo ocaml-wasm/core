@@ -12,7 +12,7 @@ var core_array_unsafe_float_blit = caml_array_blit
 function core_time_ns_format(time,format){
   var d = new Date(time * 1000);
   var formatjs = caml_jsbytes_of_string(format);
-  var jstring = joo_global_object.strftime(formatjs, d);
+  var jstring = globalThis.strftime(formatjs, d);
   return caml_string_of_jsbytes(jstring);
 }
 
