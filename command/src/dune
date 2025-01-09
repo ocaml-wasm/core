@@ -2,5 +2,6 @@
  (name command)
  (public_name core.command)
  (libraries base filename_base parsexp sexplib stdio univ_map)
+ (inline_tests (flags -drop-tag no-js -drop-tag 64-bits-only -drop-tag no-wasm) (modes js wasm))
  (preprocess
   (pps ppx_jane ppx_optcomp)))

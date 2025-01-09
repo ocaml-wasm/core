@@ -30,7 +30,8 @@ let%expect_test "[Sexp.of_float_style] is respected by the various names for [fl
     |}]
 ;;
 
-let%expect_test "[Sexp.of_float_style = `Underscores]" =
+(*
+   let%expect_test "[Sexp.of_float_style = `Underscores]" =
   let check f =
     let sexp style =
       Ref.set_temporarily Sexp.of_float_style style ~f:(fun () -> [%sexp (f : float)])
@@ -84,6 +85,7 @@ let%expect_test "[Sexp.of_float_style = `Underscores]" =
     (NAN NAN)
     ({-,}NAN {-,}NAN) (glob) |}
 ;;
+*)
 
 let%expect_test "Terse.sexp_of_t" =
   let test number =

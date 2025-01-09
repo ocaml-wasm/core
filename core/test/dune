@@ -2,8 +2,9 @@
  (name core_test)
  (libraries base_test_helpers core expectable expect_test_helpers_core
    core_kernel.fheap core_kernel.version_util
-   expect_test_helpers_core.expect_test_helpers_base expect_test_patterns
+   expect_test_helpers_core.expect_test_helpers_base
    sexp_grammar_validation sexplib ppx_stable_witness.stable_witness)
+ (inline_tests (flags -drop-tag no-js -drop-tag 64-bits-only -drop-tag no-wasm) (modes js wasm) (deps sample_time_zone_file))
  (preprocessor_deps ../src/config.h)
  (preprocess
-  (pps ppx_jane ppx_bin_and_sexp_digest)))
+  (pps ppx_jane)))

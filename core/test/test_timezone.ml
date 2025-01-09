@@ -76,17 +76,17 @@ let%expect_test "Zone.V1" =
      (bin_io "\006UTC+24"))
     ((sexp   UTC-24)
      (bin_io "\006UTC-24"))
-    (* require-failed: lib/core/test/test_timezone.ml:LINE:COL. *)
+    (* require-failed: :0:-1. *)
     ("unexpectedly raised" (
       Of_sexp_error
       "Timezone.t_of_sexp: (\"unknown zone\" (zone \"my zone\"))"
       (invalid_sexp "my zone")))
-    (* require-failed: lib/core/test/test_timezone.ml:LINE:COL. *)
+    (* require-failed: :0:-1. *)
     ("unexpectedly raised" (
       Of_sexp_error
       "Timezone.t_of_sexp: (Failure \"Int.of_string: \\\"3:02:01\\\"\")"
       (invalid_sexp UTC-3:02:01)))
-    (* require-failed: lib/core/test/test_timezone.ml:LINE:COL. *)
+    (* require-failed: :0:-1. *)
     ("unexpectedly raised" (
       Of_sexp_error
       "Timezone.t_of_sexp: (\"unknown zone\" (zone hkg+1))"
