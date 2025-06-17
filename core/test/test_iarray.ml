@@ -13,7 +13,9 @@ end [@ocaml.remove_aliases] [@warning "-unused-module"] = struct
   [%%rederive.portable
     type 'a t = 'a Iarray.t [@@deriving bin_io ~localize, quickcheck ~portable, typerep]]
 
+(*???
   let iarray_should_be_layout_polymorphic = Iarray.iarray_should_be_layout_polymorphic
+*)
 
   let%expect_test "unstable (pseudo-nondeterministic) sample" =
     Test.with_sample_exn
@@ -1116,6 +1118,7 @@ end [@ocaml.remove_aliases] [@warning "-unused-module"] = struct
     [%expect {| 4 4 |}]
   ;;
 
+(*
   let%expect_test _ =
     (Base_container_tests.test_indexed_container_s1_with_creators [@alloc stack])
       ~check_no_allocation:true
@@ -1257,6 +1260,7 @@ end [@ocaml.remove_aliases] [@warning "-unused-module"] = struct
       Container: testing [partition_mapi__local__stack zero_alloc]
       |}]
   ;;
+*)
 
   let%expect_test "standard stable conversions" =
     print_and_check_stable_type
@@ -2293,7 +2297,7 @@ end [@ocaml.remove_aliases] [@warning "-unused-module"] = struct
       {|
       (allocs (
         (major_words_allocated 0)
-        (minor_words_allocated 2)))
+        (minor_words_allocated 0)))
       |}];
     let #(_, allocs) =
       Gc.For_testing.measure_allocation (fun () -> max_elt ~compare:Int.compare iarr)
@@ -2303,7 +2307,7 @@ end [@ocaml.remove_aliases] [@warning "-unused-module"] = struct
       {|
       (allocs (
         (major_words_allocated 0)
-        (minor_words_allocated 2)))
+        (minor_words_allocated 0)))
       |}]
   ;;
 

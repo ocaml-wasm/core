@@ -18,6 +18,7 @@
    ppx_assert.runtime-lib ppx_hash.runtime-lib ppx_inline_test.runtime-lib
    sexplib splittable_random ppx_stable_witness.stable_witness stdio
    string_dict time_now typerep univ_map uopt validate variantslib)
+ (inline_tests (flags -drop-tag no-js -drop-tag 64-bits-only -drop-tag no-wasm) (modes js wasm))
  (ocamlopt_flags
   :standard
   (:include ocamlopt-flags))
