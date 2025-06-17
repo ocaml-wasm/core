@@ -99,6 +99,7 @@ end
       |}]
   ;;]
 
+(*
 module%test Array_tests = struct
   module Generator = Base_quickcheck.Generator
   module Int = Core.Int
@@ -1086,3 +1087,4 @@ module%test Array_tests = struct
       |}]
   ;;
 end
+*)

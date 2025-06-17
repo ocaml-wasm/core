@@ -57,7 +57,7 @@ let%expect_test "[sexp_of_t]" =
   [%expect
     {|
     ((value  13)
-     (set_at lib/core/test/test_set_once.ml:LINE:COL))
+     (set_at lib/core/core/test/test_set_once.ml:LINE:COL))
     |}]
 ;;
 
@@ -98,7 +98,10 @@ let%expect_test "[get_exn]" =
   let t = create () in
   show_raise ~hide_positions (fun () -> get_exn t);
   [%expect
-    {| (raised ("[Set_once.get_exn] unset" (at lib/core/test/test_set_once.ml:LINE:COL))) |}];
+    {|
+    (raised (
+      "[Set_once.get_exn] unset" (at lib/core/core/test/test_set_once.ml:LINE:COL)))
+    |}];
   set_exn t 13;
   print_s [%message "" ~_:(get_exn t : int)];
   [%expect {| 13 |}]
@@ -130,8 +133,8 @@ let%expect_test "[set] error" =
     {|
     (Error (
       "[Set_once.set_exn] already set"
-      (setting_at lib/core/test/test_set_once.ml:LINE:COL)
-      (previously_set_at lib/core/test/test_set_once.ml:LINE:COL)))
+      (setting_at lib/core/core/test/test_set_once.ml:LINE:COL)
+      (previously_set_at lib/core/core/test/test_set_once.ml:LINE:COL)))
     |}]
 ;;
 
@@ -143,8 +146,8 @@ let%expect_test "[set_exn] error" =
     {|
     (raised (
       "[Set_once.set_exn] already set"
-      (setting_at lib/core/test/test_set_once.ml:LINE:COL)
-      (previously_set_at lib/core/test/test_set_once.ml:LINE:COL)))
+      (setting_at lib/core/core/test/test_set_once.ml:LINE:COL)
+      (previously_set_at lib/core/core/test/test_set_once.ml:LINE:COL)))
     |}]
 ;;
 

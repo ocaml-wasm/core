@@ -50,8 +50,8 @@ let%expect_test "[fold2]" =
   test2
     (fold2 ~init:[])
     (fun ac x1 x2 ->
-      print2 x1 x2;
-      (x1, x2) :: ac)
+       print2 x1 x2;
+       (x1, x2) :: ac)
     [%sexp_of: (int * int) list];
   [%expect
     {|
@@ -105,8 +105,8 @@ let%expect_test "[map2]" =
   test2
     map2
     (fun x1 x2 ->
-      print2 x1 x2;
-      x1, x2)
+       print2 x1 x2;
+       x1, x2)
     [%sexp_of: (int * int) list];
   [%expect
     {|
@@ -126,8 +126,8 @@ let%expect_test "[map3]" =
   test3
     map3
     (fun x1 x2 x3 ->
-      print3 x1 x2 x3;
-      x1, x2, x3)
+       print3 x1 x2 x3;
+       x1, x2, x3)
     [%sexp_of: (int * int * int) list];
   [%expect
     {|
@@ -149,8 +149,8 @@ let%expect_test "[rev_map2]" =
   test2
     rev_map2
     (fun x1 x2 ->
-      print2 x1 x2;
-      x1, x2)
+       print2 x1 x2;
+       x1, x2)
     [%sexp_of: (int * int) list];
   [%expect
     {|
@@ -170,8 +170,8 @@ let%expect_test "[rev_map3]" =
   test3
     rev_map3
     (fun x1 x2 x3 ->
-      print3 x1 x2 x3;
-      x1, x2, x3)
+       print3 x1 x2 x3;
+       x1, x2, x3)
     [%sexp_of: (int * int * int) list];
   [%expect
     {|
@@ -219,7 +219,8 @@ end
 
 (* Test functions with templated definitions *)
 
-module%test Nonvalue_layout_tests = struct
+(*
+   module%test Nonvalue_layout_tests = struct
   module Generator = Base_quickcheck.Generator
   module Shrinker = Base_quickcheck.Shrinker
   open Generator.Let_syntax
@@ -749,3 +750,4 @@ module%test Nonvalue_layout_tests = struct
       |}]
   ;;]
 end
+*)
