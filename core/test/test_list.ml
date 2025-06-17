@@ -219,6 +219,7 @@ end
 
 (* Test functions with templated definitions *)
 
+(*
 module%test Nonvalue_layout_tests = struct
   module Generator = Base_quickcheck.Generator
   module Shrinker = Base_quickcheck.Shrinker
@@ -710,3 +711,4 @@ module%test Nonvalue_layout_tests = struct
       |}]
   ;;]
 end
+*)

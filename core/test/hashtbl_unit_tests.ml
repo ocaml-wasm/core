@@ -2162,7 +2162,7 @@ let%expect_test "smoke tests for templated versions making sure the Core wrapper
     type t = string option [@@deriving compare, equal, sexp]
   end
   in
-  let t = (Hashtbl.create [@kind bits64 value]) (module Int64_u) in
+  let t = (Hashtbl.create [@kind bits64 value]) (module Int64) in
   (Hashtbl.set [@kind bits64 value]) t ~key:1L ~data:"foo";
   require ((Hashtbl.mem [@kind bits64 value]) t 1L);
   require (not @@ (Hashtbl.mem [@kind bits64 value]) t 2L);
@@ -2172,7 +2172,7 @@ let%expect_test "smoke tests for templated versions making sure the Core wrapper
   require_does_raise (fun () ->
     (Hashtbl.add_exn [@kind bits64 value]) t ~key:0L ~data:"zero");
   [%expect {| ("Hashtbl.add_exn got key already present" 0) |}];
-  print_s [%sexp (t : ((Int64_u.t, string) Hashtbl.t[@kind bits64 value]))];
+  print_s [%sexp (t : ((Int64.t, string) Hashtbl.t[@kind bits64 value]))];
   [%expect
     {|
     ((0 zero)

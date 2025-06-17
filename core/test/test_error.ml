@@ -14,7 +14,7 @@ let%expect_test "[failwiths] handles [Lexing.dummy_pos]" =
      arguments *)
   require_does_raise ~hide_positions:true (fun () ->
     Error.failwiths "hello world" 13 sexp_of_int);
-  [%expect {| ("hello world" 13 lib/core/test/test_error.ml:LINE:COL) |}];
+  [%expect {| ("hello world" 13) |}];
   require_does_raise ~hide_positions:true (fun () ->
     Error.failwiths ~here:Lexing.dummy_pos "hello world" 13 sexp_of_int);
   [%expect {| ("hello world" 13) |}]

@@ -807,7 +807,7 @@ struct
 
   module Domain = struct
     include Stdlib.Domain
-    include Basement.Stdlib_shim.Domain.Safe
+    module Safe = Basement.Stdlib_shim.Domain.Safe
   end
 
   let test

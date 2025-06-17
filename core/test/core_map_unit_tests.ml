@@ -1394,12 +1394,12 @@ struct
 
   let%expect_test _ =
     require_does_raise (fun () -> Map.min_elt_exn (Map.empty ()));
-    [%expect {| map.ml.Tree0.Map_min_elt_exn_of_empty_map |}]
+    [%expect {| lib/base/src/map.ml.Tree0.Map_min_elt_exn_of_empty_map |}]
   ;;
 
   let%expect_test _ =
     require_does_raise (fun () -> Map.max_elt_exn (Map.empty ()));
-    [%expect {| map.ml.Tree0.Map_max_elt_exn_of_empty_map |}]
+    [%expect {| lib/base/src/map.ml.Tree0.Map_max_elt_exn_of_empty_map |}]
   ;;
 
   let for_all _ = assert false

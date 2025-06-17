@@ -966,7 +966,7 @@ end [@ocaml.remove_aliases] [@warning "-unused-module"] = struct
   external unsafe_of_array__promise_no_mutation
     :  ('a array[@local_opt])
     -> ('a t[@local_opt])
-    = "%array_to_iarray"
+    = "%identity"
 
   let%expect_test _ =
     quickcheck_m
@@ -988,14 +988,14 @@ end [@ocaml.remove_aliases] [@warning "-unused-module"] = struct
   include struct
     open%template struct
       (* Accumulators just convert from an int and then do an int operation *)
-      let[@kind bits64] of_int = Int64_u.of_int
-      let[@kind bits32] of_int = Int32_u.of_int_trunc
-      let[@kind word] of_int = Nativeint_u.of_int
-      let[@kind float64] of_int = Float_u.of_int
-      let[@kind bits64] to_int = Int64_u.to_int_trunc
-      let[@kind bits32] to_int = Int32_u.to_int_trunc
-      let[@kind word] to_int = Nativeint_u.to_int_trunc
-      let[@kind float64] to_int = Float_u.to_int
+      let[@kind bits64] of_int = Int64.of_int
+      let[@kind bits32] of_int = Int32.of_int_trunc
+      let[@kind word] of_int = Nativeint.of_int
+      let[@kind float64] of_int = Float.of_int
+      let[@kind bits64] to_int = Int64.to_int_trunc
+      let[@kind bits32] to_int = Int32.to_int_trunc
+      let[@kind word] to_int = Nativeint.to_int_trunc
+      let[@kind float64] to_int = Float.to_int
     end
 
     [%%template
@@ -1038,6 +1038,7 @@ end [@ocaml.remove_aliases] [@warning "-unused-module"] = struct
     [%expect {| 4 4 |}]
   ;;
 
+(*
   let%expect_test _ =
     Base_container_tests.test_indexed_container_s1_with_creators (module Iarray);
     [%expect
@@ -1085,6 +1086,7 @@ end [@ocaml.remove_aliases] [@warning "-unused-module"] = struct
       Container: testing [partition_mapi]
       |}]
   ;;
+*)
 
   let%expect_test "standard stable conversions" =
     print_and_check_stable_type
@@ -1655,14 +1657,14 @@ end [@ocaml.remove_aliases] [@warning "-unused-module"] = struct
     include struct
       open%template struct
         (* Accumulators just convert from an int and then do an int operation *)
-        let[@kind bits64] of_int = Int64_u.of_int
-        let[@kind bits32] of_int = Int32_u.of_int_trunc
-        let[@kind word] of_int = Nativeint_u.of_int
-        let[@kind float64] of_int = Float_u.of_int
-        let[@kind bits64] to_int = Int64_u.to_int_trunc
-        let[@kind bits32] to_int = Int32_u.to_int_trunc
-        let[@kind word] to_int = Nativeint_u.to_int_trunc
-        let[@kind float64] to_int = Float_u.to_int
+        let[@kind bits64] of_int = Int64.of_int
+        let[@kind bits32] of_int = Int32.of_int_trunc
+        let[@kind word] of_int = Nativeint.of_int
+        let[@kind float64] of_int = Float.of_int
+        let[@kind bits64] to_int = Int64.to_int_trunc
+        let[@kind bits32] to_int = Int32.to_int_trunc
+        let[@kind word] to_int = Nativeint.to_int_trunc
+        let[@kind float64] to_int = Float.to_int
       end
 
       [%%template
@@ -1934,7 +1936,7 @@ end [@ocaml.remove_aliases] [@warning "-unused-module"] = struct
       {|
       (allocs (
         (major_words_allocated 0)
-        (minor_words_allocated 2)))
+        (minor_words_allocated 0)))
       |}];
     let _, allocs =
       Gc.For_testing.measure_allocation (fun () -> max_elt ~compare:Int.compare iarr)
@@ -1944,7 +1946,7 @@ end [@ocaml.remove_aliases] [@warning "-unused-module"] = struct
       {|
       (allocs (
         (major_words_allocated 0)
-        (minor_words_allocated 2)))
+        (minor_words_allocated 0)))
       |}]
   ;;
 

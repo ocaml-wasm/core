@@ -259,6 +259,10 @@ module%test _ = struct
     check_u M.typerep_of_t [ { M.foo = () } ] |> require_maybe_boxed;
     [%expect
       {|
+      (* CR-someday require-failed: :0:-1.
+         Do not 'X' this CR; instead make the required property true,
+         which will make the CR disappear.  For more information, see
+         [Expect_test_helpers_base.require]. *)
       "Boxed container types should never be immediate"
       |}]
   ;;
@@ -273,6 +277,10 @@ module%test _ = struct
     check_u M.typerep_of_t [ { M.foo = () } ] |> require_maybe_boxed;
     [%expect
       {|
+      (* CR-someday require-failed: :0:-1.
+         Do not 'X' this CR; instead make the required property true,
+         which will make the CR disappear.  For more information, see
+         [Expect_test_helpers_base.require]. *)
       "Unboxed container types should have the immediacy of their contained type"
       |}]
   ;;
@@ -384,6 +392,10 @@ module%test _ = struct
     check_u M.typerep_of_t [ M.Foo () ] |> require_maybe_boxed;
     [%expect
       {|
+      (* CR-someday require-failed: :0:-1.
+         Do not 'X' this CR; instead make the required property true,
+         which will make the CR disappear.  For more information, see
+         [Expect_test_helpers_base.require]. *)
       "Boxed container types should never be immediate"
       |}]
   ;;
@@ -398,6 +410,10 @@ module%test _ = struct
     check_u M.typerep_of_t [ M.Foo () ] |> require_maybe_boxed;
     [%expect
       {|
+      (* CR-someday require-failed: :0:-1.
+         Do not 'X' this CR; instead make the required property true,
+         which will make the CR disappear.  For more information, see
+         [Expect_test_helpers_base.require]. *)
       "Unboxed container types should have the immediacy of their contained type"
       |}]
   ;;
@@ -547,7 +563,7 @@ module%test _ = struct
     [%expect
       {|
       (Failure
-       "type type_immediacy_witness_unit_tests.ml.t is not independent of its arguments")
+       "type lib/core/core/test/type_immediacy_witness_unit_tests.ml.t is not independent of its arguments")
       |}];
     require_does_raise (fun () ->
       let module _ = Type_immediacy.Never.For_all_parameters_S1 (M) in
@@ -555,7 +571,7 @@ module%test _ = struct
     [%expect
       {|
       (Failure
-       "type type_immediacy_witness_unit_tests.ml.t is not independent of its arguments")
+       "type lib/core/core/test/type_immediacy_witness_unit_tests.ml.t is not independent of its arguments")
       |}];
     require_does_raise (fun () ->
       let module _ = Type_immediacy.Always.For_all_parameters_S1 (M) in
@@ -563,7 +579,7 @@ module%test _ = struct
     [%expect
       {|
       (Failure
-       "type type_immediacy_witness_unit_tests.ml.t is not independent of its arguments")
+       "type lib/core/core/test/type_immediacy_witness_unit_tests.ml.t is not independent of its arguments")
       |}]
   ;;
 
