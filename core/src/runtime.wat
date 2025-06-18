@@ -77,7 +77,8 @@
    (export "core_array_unsafe_float_blit" (func $caml_floatarray_blit))
 
    (type $block (array (mut (ref eq))))
-   (type $string (array (mut i8)))
+   (type $string (struct (field anyref)))
+   (type $bytes (array (mut i8)))
    (type $float (struct (field f64)))
 
    (data $Date "Date")
@@ -148,25 +149,19 @@
 
    (type $int_array (array (mut i32)))
 
-   (data $bigstring_destroy_already_deallocated
-      "bigstring_destroy: bigstring is already deallocated")
-
    (func $bigstring_destroy_stub (export "bigstring_destroy_stub")
       (param $v (ref eq)) (result (ref eq))
       (if (ref.test (ref i31)
             (extern.internalize (call $caml_ba_get_data (local.get $v))))
          (then
             (call $caml_invalid_argument
-               (array.new_data $string $bigstring_destroy_already_deallocated
-                  (i32.const 0) (i32.const 51)))))
+               (@string "bigstring_destroy: bigstring is already deallocated"))
+         ))
       (call $caml_ba_set_data (local.get $v)
          (extern.externalize (ref.i31 (i32.const 0))))
       (array.set $int_array (call $caml_ba_get_dim (local.get $v)) (i32.const 0)
          (i32.const 0))
       (ref.i31 (i32.const 0)))
-
-   (data $bigstring_realloc_already_deallocated
-      "bigstring_realloc: bigstring is already deallocated")
 
    (func (export "bigstring_realloc")
       (param $bigstring (ref eq)) (param $vsize (ref eq))
@@ -180,8 +175,8 @@
                (call $caml_ba_get_data (local.get $bigstring))))
          (then
             (call $caml_invalid_argument
-               (array.new_data $string $bigstring_realloc_already_deallocated
-                  (i32.const 0) (i32.const 51)))))
+               (@string "bigstring_realloc: bigstring is already deallocated"))
+         ))
       (local.set $new_data
          (call $caml_ba_create_buffer
             (call $caml_ba_get_kind (local.get $bigstring))
