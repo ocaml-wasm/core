@@ -149,13 +149,13 @@
    (func $bigstring_destroy_stub (export "bigstring_destroy_stub")
       (param $v (ref eq)) (result (ref eq))
       (if (ref.test (ref i31)
-            (extern.internalize (call $caml_ba_get_data (local.get $v))))
+            (any.convert_extern (call $caml_ba_get_data (local.get $v))))
          (then
             (call $caml_invalid_argument
                (array.new_data $string $bigstring_destroy_already_deallocated
                   (i32.const 0) (i32.const 51)))))
       (call $caml_ba_set_data (local.get $v)
-         (extern.externalize (ref.i31 (i32.const 0))))
+         (extern.convert_any (ref.i31 (i32.const 0))))
       (array.set $int_array (call $caml_ba_get_dim (local.get $v)) (i32.const 0)
          (i32.const 0))
       (ref.i31 (i32.const 0)))
@@ -171,7 +171,7 @@
       (local $new_data (ref extern))
       (local.set $size (i31.get_u (ref.cast (ref i31) (local.get $vsize))))
       (if (ref.test (ref i31)
-            (extern.internalize
+            (any.convert_extern
                (call $caml_ba_get_data (local.get $bigstring))))
          (then
             (call $caml_invalid_argument
