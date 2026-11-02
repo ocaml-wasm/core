@@ -1,4 +1,6 @@
 (module
+   (@string_imports "str")
+   (@string_type $string)
    (import "env" "caml_array_blit"
       (func $caml_array_blit
          (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq))
@@ -38,8 +40,8 @@
       (func $caml_blit_string
          (param (ref eq)) (param (ref eq)) (param (ref eq)) (param (ref eq))
          (param (ref eq)) (result (ref eq))))
-   (import "env" "caml_md5_string"
-      (func $caml_md5_string
+   (import "env" "caml_md5_bytes"
+      (func $caml_md5_bytes
          (param (ref eq)) (param (ref eq)) (param (ref eq)) (result (ref eq))))
    (import "env" "caml_bigstring_blit_ba_to_bytes"
       (func $bigstring_blit_bigstring_bytes_stub
@@ -77,7 +79,11 @@
    (export "core_array_unsafe_float_blit" (func $caml_floatarray_blit))
 
    (type $block (array (mut (ref eq))))
-   (type $string (array (mut i8)))
+(@if $use_js_string
+(@then
+   (type $string (struct (field externref))))
+(@else
+   (type $string (array (mut i8)))))
    (type $float (struct (field f64)))
 
    (data $Date "Date")
@@ -137,7 +143,7 @@
             (local.get $buf) (local.get $ofs) (local.get $bytes)
             (ref.i31 (i32.const 0)) (local.get $len)))
       (local.set $res2
-         (call $caml_md5_string
+         (call $caml_md5_bytes
             (local.get $bytes) (ref.i31 (i32.const 0)) (local.get $len)))
       (drop
          (call $caml_blit_string
@@ -148,7 +154,7 @@
 
    (type $int_array (array (mut i32)))
 
-   (data $bigstring_destroy_already_deallocated
+   (@string $bigstring_destroy_already_deallocated
       "bigstring_destroy: bigstring is already deallocated")
 
    (func $bigstring_destroy_stub (export "bigstring_destroy_stub")
@@ -157,15 +163,14 @@
             (any.convert_extern (call $caml_ba_get_data (local.get $v))))
          (then
             (call $caml_invalid_argument
-               (array.new_data $string $bigstring_destroy_already_deallocated
-                  (i32.const 0) (i32.const 51)))))
+               (global.get $bigstring_destroy_already_deallocated))))
       (call $caml_ba_set_data (local.get $v)
          (extern.convert_any (ref.i31 (i32.const 0))))
       (array.set $int_array (call $caml_ba_get_dim (local.get $v)) (i32.const 0)
          (i32.const 0))
       (ref.i31 (i32.const 0)))
 
-   (data $bigstring_realloc_already_deallocated
+   (@string $bigstring_realloc_already_deallocated
       "bigstring_realloc: bigstring is already deallocated")
 
    (func (export "bigstring_realloc")
@@ -180,8 +185,7 @@
                (call $caml_ba_get_data (local.get $bigstring))))
          (then
             (call $caml_invalid_argument
-               (array.new_data $string $bigstring_realloc_already_deallocated
-                  (i32.const 0) (i32.const 51)))))
+               (global.get $bigstring_realloc_already_deallocated))))
       (local.set $new_data
          (call $caml_ba_create_buffer
             (call $caml_ba_get_kind (local.get $bigstring))
